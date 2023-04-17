@@ -1,0 +1,1783 @@
+================================PART-2=================================
+
+====================ARROW FUNCTION=====================================
+# arrow function: compact alternative to a traditional function expression.
+# eg: 
+const greeting = function (userName){
+    console.log(`hello ${userName}`);
+}
+greeting("Tobac"); 
+--> The above is without an arrow function.
+
+const greeting =(userName)=> 
+console.log(`hello ${userName}`);
+greeting("Tobac");
+
+--> Here above we used an arrow function.
+#eg:
+const percent=function(x,y){
+    return x/y*100;
+}
+console.log(`${percent(10,20)}%`);
+--> The above is without an arrow function.
+
+const percent=(x,y)=>x/y*100;
+console.log(`${percent(10,30)}%`);
+
+--> Here above we used an arrow function.
+
+#eg: 
+let grades=[76,55,88,33,99];
+grades.sort(sortGrade);
+grades.forEach(print);
+function sortGrade(x,y){
+    return y-x;
+}
+function print(element){
+    console.log(element);
+}
+--> The above is without function expression.
+-->To use a function expression we get rid of the function name and
+paste it to the place we call as sortGrade and print.It is done below.
+
+let grades=[76,55,88,33,99];
+grades.sort(function (x,y){
+    return y-x;
+});
+grades.forEach(function (element){
+    console.log(element);
+});
+
+--> Below with an arrow function it works the same way.
+
+let grades=[76,55,88,33,99];
+grades.sort((x,y)=>y-x);
+grades.forEach((element)=>console.log(element));
+
+# So arrow expression is used in place of function expression.
+
+==========================SHUFFLE======================================
+# eg:
+let cards=['A','2','3','4','5','6','7','8','9','10',
+            'J','K','Q'];
+
+shuffle(cards);
+console.log("This are  shuffled cards : ",cards);
+
+function shuffle(array){
+    let currentIndex=array.length;
+
+    while(currentIndex!=0){
+        let randomIndex=Math.floor(Math.random()*array.length);
+        currentIndex-=1;
+        
+     // temporary storage to swap elements.
+        let temp=array[currentIndex];
+        array[currentIndex]=array[randomIndex];
+        array[randomIndex]=temp;
+    }
+    return array;
+}
+
+--> We can change using techniques below.
+console.log(cards[0]); // brings the first index element of the card.
+--> Outputs each of the shuffled one.
+cards.forEach(card=>console.log(card));
+
+===========================NESTED FUNCTION=============================
+# Nested function: is a functions inside another functions. 
+# Outer functions have access to inner functions.
+# Inner functions are hidden from outside the outer function
+                   used in closures.
+#eg: 
+let user="Robel";
+let userInbox=10;
+
+login();
+
+function login(){
+    displayUser();
+    displayInbox();
+    function displayUser(){
+        console.log(`Welcome ${user}`);
+    }
+    function displayInbox(){
+        console.log(`You have ${userInbox} messages`);
+    }
+}
+
+=============================MAP=======================================
+# Map:  is an object that holds key-value pairs of any data type.
+# Syntax:
+const store=new Map([
+    ['key',associated value ]
+]);
+# eg:
+const store=new Map([
+    ['Pant',32],['T-shirt',17],['Socks',7],['U_wear',30]
+
+]);
+ store.forEach((value,key)=>console.log(`${key} $${value}`));
+# eg:
+const store=new Map([
+    ['Pant',32],['T-shirt',17],['Socks',7],['U_wear',30]
+
+]);
+let  shoppingCart=0;
+shoppingCart+=store.get('Pant');// display 32
+shoppingCart+=store.get('Socks');// display 32+7=39
+console.log(shoppingCart);
+store.forEach((value,key)=>console.log(`${key} $${value}`));
+
+# eg: 
+store.set('hat',40);
+--> Adds new item with value.
+store.delete('Socks'); // delete it
+
+console.log(store.has('hat')); 
+// gives boolean value by checking it has the element listed or not
+console.log(store.size);// gives us the size 
+
+============================OBJECT====================================
+# Object: is a group of properties and methods. 
+-->properties = which an object has 
+-->methods= what an object can do 
+-->use. to access properties/methods.
+# eg:
+const car={
+    model:'Ferrari',color:'green',year:2023,
+    // the one below is drive function.drive is the function name
+    drive:function (){
+        console.log('You drive the car');
+    },
+
+    brake:function(){
+        console.log('You stopped the car');
+    },
+// we have an object named car . we have properties 
+// like model,color,year and we have methods like drive 
+// and brake. The methods tell it can drive or brake.
+
+}
+
+console.log(car.year);
+car.drive();
+
+=====================THIS KEY-WORD====================================
+# this: is a reference to a particular object.
+        The object depends on the immediate context.
+# eg:
+
+const car1={
+    model:'Ferrari',color:'green',year:2023,
+    // the one below is drive function.drive is the function name
+    drive:function (){
+        console.log(`You drive the ${this.model} car`);
+        // to access the model we use this. key word
+        // this refer the object we currently work with.
+    },
+
+ 
+}
+
+const car2={
+    model:'Audi',color:'gray',year:2022,
+    drive:function (){
+        console.log(`You drive the ${this.model} car`);
+    },  
+}
+//console.log(car1.model);
+car1.drive();
+
+//console.log(car2.model);
+car2.drive();
+#This is the reference to the object and in place of it we can replace
+the name of the object.
+# console.log(this); 
+--> The above one outside a function tells us the window properties.
+# eg: 
+this.name='My window';
+console.log(this);
+--> It changes the window property we have here.
+      OR
+this.name='My window';
+console.log(this.name);
+--> Displays in the console.
+     OR 
+window.name='My window';
+console.log(window.name);
+
+=====================CLASS===========================================
+# Class:is a blueprint for creating objects define what properties and
+        methods they have use a constructor for unique properties.
+#eg:
+class Player{
+    score=0;
+    pause(){
+        console.log('You paused the game');
+    }
+    exit(){
+        console.log('You exited the game');
+    }
+}
+const Player1=new Player(); // important line before calling.
+const Player2=new Player(); // It is unique object name.
+
+Player1.score+=1;
+console.log(Player1.score);
+Player1.exit();
+
+Player2.score+=10;
+console.log(Player2.score);
+Player2.pause();
+
+==========================CONSTRUCTOR=================================
+# Constructor: is a special method of a class, accepts arguments and
+              assigns properties.
+# eg: class Student{
+
+    constructor(name,age,gpa){
+        this.name=name;
+        this.age=age;
+        this.gpa=gpa;
+    }
+    // study here is a method.
+    study(){
+        console.log(`${this.name} is on study's`);
+
+    }
+
+}
+const Student1=new Student("Robel",22,5.0);
+console.log(Student1.name);
+console.log(Student1.age);
+console.log(Student1.gpa);
+Student1.study();
+=================================STATIC===============================
+#static: belongs to the class , not the objects.
+#Properties: useful for caches,fixed-configuration
+#Methods:useful for utility functions.
+#eg:
+class car{
+       numberOfCars=0;
+    constructor(model){
+        this.model=model;
+        this.numberOfCars+=1;
+    }
+}
+const carz=new car("Vols and Rols");
+const cary=new car("Ford");
+const carx=new car("BMW");
+console.log(carz.model);
+console.log(carz.numberOfCars);
+console.log(cary.numberOfCars);
+console.log(carx.numberOfCars);
+--> The above one is without static key-word. At end we get 1,1,1 for each.
+class car{
+       static numberOfCars=0;
+    constructor(model){
+        this.model=model;
+        car.numberOfCars+=1;
+    }
+
+    static startRace(){
+        console.log('3...2.....1....Go!');
+    }
+}
+const carz=new car("Vols and Rols");
+const cary=new car("Ford");
+const carx=new car("BMW");
+console.log(carx.model);
+console.log(car.numberOfCars);
+
+car.startRace();
+
+--> Here above we used the static key-word and we have the sum of all 
+the values we want to have.
+
+======================INHERITANCE====================================
+# Inhertance: a child class can inherit all the methods and properties
+              from another class.
+#eg: --> This below is without any inheritance.
+class Rat{
+    alive=true;
+    name="Rat";
+    age=3;
+
+    dance(){
+        console.log(`This ${this.name} is dancing`);
+    }
+    sleep(){
+        console.log(`This ${this.name} is sleeping`);
+    }
+}
+
+class Goat{
+    alive=true;
+    name="Goat";
+    age=3;
+
+    dance(){
+        console.log(`This ${this.name} is not dancing`);
+    }
+    sleep(){
+        console.log(`This ${this.name} is not sleeping`);
+    }
+}
+# eg:
+class Animal{
+    alive=true;
+    sleep(){
+        console.log(`This ${this.name} is sleeping`);
+    }
+
+}
+class Rat extends Animal{
+   
+    name="Rat";
+    age=3;
+
+    dance(){
+        console.log(`This ${this.name} is dancing`);
+    }
+}
+
+class Goat extends Animal{
+    alive=true;
+    name="Goat";
+    age=7;
+    
+    walk(){
+        console.log(`This ${this.name} is not walking`);
+    }
+}
+
+const rat=new Rat();
+const goat=new Goat();
+
+console.log(rat.age);
+goat.sleep();
+ 
+=======================SUPER KEY-WORD==================================
+# Super: refers to the parent class. Commonly used to invoke 
+         constructor of a parent class.
+# If we are using constractor and allow inhertance in our code
+we use the super key word.
+# eg:
+class Animal{
+    constructor(name,age){
+        this.name=name;
+        this.age=age;
+    }
+
+}
+class Rat extends Animal {
+    constructor(name,age,runSpeed){
+        super(name,age);
+        // here we are extending our code so we have 
+        // to use super constructor before.
+        this.runSpeed=runSpeed;
+    }   
+}
+
+class Goat extends Animal {
+    constructor(name,age,walkSpeed){
+        super(name,age);
+        this.walkSpeed=walkSpeed;
+    } 
+}
+
+const rat=new Rat("Guzi",4,44);
+const goat=new Goat("Lufa-goat",4,17);
+console.log(rat.name);
+console.log(rat.age);
+console.log(rat.runSpeed);
+
+console.log(goat.name);
+console.log(goat.age);
+console.log(goat.walkSpeed);
+
+============================GET====================================
+# get: binds an object property to a function when that property
+       is accessed.
+#eg: Before using getter we can display like down below.
+class device{
+    constructor (power){
+        this.power=power;
+    }
+}
+let device1=new device(450);
+console.log(device1.power+" hp ");// here on this line is the advantage of getter missed.
+# eg:
+class device{
+    constructor (power){
+        this._power=power;
+    }
+    get power(){
+        return `${this._power} hp`; // protected property
+    }
+}
+let device1=new device(450);
+device1.power=1000000;
+// even we try to change the value here we doesn't get
+// an access to this property.(above)
+device1._power=1000000; // thsi works
+console.log(device1.power);
+# Set: binds an object property to a function when that property 
+       is assigned a value.
+#eg:
+class device{
+    constructor (power){
+        this._gas=67;
+        this._power=power;
+    }
+    get power(){
+        return `${this._power} hp`; // protected property
+    }
+    /*
+    get gas(){
+        return `${this._gas} L`; // protected property
+    }*/
+    set gas(value){
+        if(value>50){
+            value=50; 
+        // if it is above 50 we set it as 50.
+        }
+        else if(value<0){
+            value=0;
+        }
+        this._gas=value;
+    }
+}
+let device1=new device(450);
+device1.gas=-20;
+device1._power=1000000; // thsi works
+console.log(device1.power);
+console.log(device1.gas); 
+
+==================PASS OBJECT TO FUNCTION AS AN ARGUMENT==============
+# eg:
+class Car{
+    constructor(model,year,color){
+        this.model=model;
+        this.year=year;
+        this.color=color;
+    }
+}
+
+const car1=new Car("Ferrari",2023,"Green");
+const car2=new Car("Rolls and Royce",2024,"Black");
+const car3=new Car("Volkswagen",2023,"White");
+
+changeCo(car2,'White');
+
+display(car1);
+display(car2);
+display(car3);
+function display(car){
+    console.log(car.model);
+    console.log(car.year);
+    console.log(car.color);
+}
+function changeCo(car,color){
+    car.color=color;
+}
+
+==============================ARRAY OF OBJECT==========================
+# eg:
+class Car{
+    constructor(model,year,color){
+        this.model=model;
+        this.year=year;
+        this.color=color;
+    }
+
+    drive(){
+        console.log(`You are driving ${this.model} car`);
+    }
+}
+
+const car1=new Car("Ferrari",2023,"Green");
+const car2=new Car("Rolls and Royce",2024,"Black");
+const car3=new Car("Volkswagen",2023,"White");
+
+changeCo(car2,'White');
+
+display(car1);
+display(car2);
+display(car3);
+function display(car){
+    console.log(car.model);
+    console.log(car.year);
+    console.log(car.color);
+}
+function changeCo(car,color){
+    car.color=color;
+
+}
+car1.drive();
+
+const cars=[car1,car2,car3];
+console.log(cars[0].model);
+/*
+for(let i=0;i<cars.length;i++){
+    cars[i].drive();
+}
+// way 2 is below.
+*/
+startRace(cars);
+function startRace(cars){
+    for (const car of cars){
+        car.drive();
+    }
+}
+
+==========================ANONYMOUS OBJECTS===========================
+# Anonymous objects: are objects without a name. Not directly 
+                     referenced. Less syntax. No need for unique names.
+# eg:
+class Card{
+    constructor(value,suit){
+        this.value=value;
+        this.suit=suit;
+    }
+}
+
+let card1= new Card('J','Heart');
+let card2= new Card('J','Spades');
+let card3= new Card('J','Clubs');
+let card4= new Card('J','Diamonds');
+let card5= new Card('A','Heart');
+let card6= new Card('A','Spades');
+let card7= new Card('A','Clubs');
+let card8= new Card('A','Diamonds');
+
+let cards=[card1,card2,card3,card4,card5,card6,card7,card8];
+console.log(card1.value+" of "+card1.suit); // directly by name
+console.log(cards[0].value+" of "+cards[0].suit);// indirectly via array index
+// Both the aboves do on the same way 
+
+# Using anonymous objects is shown below
+
+let cards=[new Card('J','Heart'),
+           new Card('J','Spades'),
+           new Card('J','Clubs'),
+           new Card('J','Diamonds'),
+           new Card('A','Heart'),
+           new Card('A','Spades'),
+           new Card('A','Clubs'),
+           new Card('A','Diamonds')];
+
+   
+cards.forEach(card=>console.log(`${card.value}  ${card.suit}`));
+console.log(cards[2].value+" of "+cards[2].suit);// indirectly via array index
+
+=========================ERROR HANDLING==============================
+# error: object with a description of something went wrong.
+# It can be : can't open a file, lose connection, user types 
+  incorrect input and typeError.
+#throw: executes a user-defined error.
+# eg:console.lag();
+-->This is Uncaught TypeError.
+# eg:
+try{
+    console.lg();
+}
+catch(error){
+    console.log(error);
+}
+--> TypeError:console.lg is not a function.
+# eg:
+try{
+    let x=window.prompt('Enter a #');
+    x=Number(x);
+
+    console.log(`${x} is a number`);
+}
+catch(error){
+    console.log(error);
+}
+--> If we put cake as an input it will give us NaN is a number. 
+To avoif this we use the way below.
+
+try{
+    let x=window.prompt('Enter a #');
+    x=Number(x);
+    if(isNaN(x)) throw "This is not a number";
+
+    console.log(`${x} is a number`);
+}
+catch(error){
+    console.log(error);
+}
+
+--> If we don't type anything and put enter we get O is a number as output.
+To avoid it we put the following below in our code.
+   if(x=="") throw "You didn't put anything"; 
+--> We can add the one below at the end if we want to have something
+that always executes and it cleans up our codes.
+
+finally{
+    // it is good for anykind of clean up.
+    console.log(`This always executes`);
+}
+
+========================SET TIMEOUT===================================
+# setTimeout(): invokes a function after a number of milliseconds 
+            asynchronous function(doesn't pause execution of other program).
+# eg:
+ <button id="myButton">BUY</button>  
+
+--> On .html file.
+
+ 
+/*
+setTimeout(firstMessage,4000);
+setTimeout(secondMessage,5000);
+setTimeout(thirdMessage,6000); 
+*/
+let item='dollar';
+let price=230.9;
+
+let timer1=setTimeout(firstMessage,4000,item,price);
+let timer2=setTimeout(secondMessage,5000);
+let timer3=setTimeout(thirdMessage,6000);
+function firstMessage(item,price){
+    alert(`Buy this item for ${item} ${price}`);
+}
+
+function secondMessage(){
+    alert(`Don't lose it`);
+}
+
+function thirdMessage(){
+    alert(`This is the right time for it`);
+}
+
+document.getElementById('myButton').onclick=function(){
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+    clearTimeout(timer3);
+    alert("Thanks for buying");
+}
+--> On .js file.
+
+=======================SET INTERVAL===================================
+# setInterval(): invokes a function repeatedly after a number of 
+         milliseconds asynchronous function (doesn't pause execution)
+#eg: 
+let count=0;
+let max=window.prompt('count up to some number');
+max=Number(max);
+const myTimer=setInterval(countUp,500);// 500 is in millisecond=0.5 sec
+function countUp(){
+    count+=1;
+    console.log(count);
+    if(count>=max){
+        clearInterval(myTimer);
+    }
+}
+
+=======================DATE OBJECT====================================
+# Date Object: is used to work with dates and times.
+# eg: 
+let date=new Date();
+console.log(date);
+--> Gives us the current time and date we are in exactly.
+           OR
+let date=new Date();
+date=date.toLocaleString();
+console.log(date);
+# eg:
+<label id="myLabel"></label><br> 
+--> IN .html file.
+let date=new Date();
+date=date.toLocaleString();
+document.getElementById('myLabel').innerHTML=date;
+--> In .js file.
+# eg: let date=new Date(0);
+--> If we make the date like this it is an epic which is used as 
+   a reference point in 1969.
+               OR
+let date=new Date(10000000);
+--> This is a point after 10 million ms after the start of this 
+   reference point.
+               OR
+let date=new Date(2023,04,01);
+-->Reference starts from April 1 / 2023 then it counts the time after.
+               OR
+let date=new Date(2023,0,1,2,3,6);
+--> Zero after 2023 is for January.
+--> Then day, hour,minutes and second..
+# we can also represent by string
+eg: let date=new Date('January 1, 2023 00:00:00');
+
+# eg:
+let date=new Date();
+let year=date.getFullYear();
+
+// date.setFullYear(2025);   // we can set the year as well
+// We can also set the month,date,...
+let dayOfMonth=date.getDate();
+let dayOfWeek=date.getDay();// 0 is sunday, 1 - monday
+let month=date.getMonth();
+let hour=date.getHours();// between 0 and 23..military hours
+let minutes=date.getMinutes();
+
+date=date.toLocaleString();
+document.getElementById('myLabel').innerHTML=date;
+console.log(dayOfMonth);
+console.log(dayOfWeek);
+console.log(month); // 0 is January, 3 for April
+console.log(hour);
+console.log(minutes);
+# eg:
+
+let date=new Date();
+document.getElementById('myLabel').innerHTML=formatTime(date);
+function formatDate(date){
+    let yearr=date.getFullYear();
+    let monthh=date.getMonth();
+    let dayy=date.getDate();
+
+    return `${monthh}/${dayy}/${yearr}`
+}
+
+function formatTime(date){
+    let hour=date.getHours();
+    let minutes=date.getMinutes();
+    let second=date.getSeconds();
+    let amOrpm=hour>=12?"pm":"am";
+ // ternary operator above
+    hour=(hour%12)|| 12;  // bitwise operators used.
+ //if we have 12 hour then 12%12 is 0 then 0 || 12 is 12
+
+ // the above changes our time from military to normal
+
+
+    return `${hour}:${minutes}:${second} ${amOrpm}`
+}
+
+==============SYNCHRONOUS AND ASYNCHRONOUS CODE=======================
+#Synchronous code: is in an ordered sequence. Step by step linear 
+                  instructions(start now, finish now)
+# eg: 
+console.log('start');
+console.log('This is  synchronous ');
+// to move to the second step we have to finish the 
+// previous step first.
+console.log('end');
+#Asynchronous code: is out of sequence.It doesn't pause the progarm.
+ ex: Access a database , Fetch a file , Tasks that take time
+    (start now, finish sometime later).
+#eg:
+console.log('start');
+setTimeout(()=>console.log('This is asynchronous'),2000);
+// step 3 doesn't need to wait step 2 to finish here.
+console.log('end');
+
+======================CONSOLE TIME=====================================
+# console.time(): starts a timer you can use to track how long an
+                  operation takes. Give each timer a unique name.
+# eg:
+console.time("Response time");// start
+console.timeEnd("Response time");// end
+# eg:
+console.time("Response time");// start
+alert('Click the OK button');
+console.timeEnd("Response time");// end
+--> Here it waits us to click and calculate the time it is elapsed.
+# eg:
+console.time("Response time");// start
+//alert('Click the OK button');
+setTimeout(()=>console.log('It takes time'),2000);
+console.timeEnd("Response time");// end
+
+=========================PROMISE=======================================
+# promise: object that encapsulates the result of an asynchronous 
+         operation. It lets asynchronous methods return values like 
+         synchronous methods.
+        'I promise to return something in the future'
+# The state is 'pending' then : 'fulfilled' or 'rejected'
+# The result is what can be returned.
+# 2 parts producing and consuming.
+# eg: 
+// if it is successful it take resolve unless reject
+const promise=new Promise((resolve,reject)=>{
+    let fileLoaded=false;
+    if(fileLoaded){
+        resolve("File is loaded");
+    }
+    else{
+        reject("File is not loaded");
+    }
+});
+// this above is producing part . 
+// The one below is consuming part.
+
+promise.then(value=>console.log(value))
+       .catch(error=>console.log(error));
+// then part works the resolve() 
+// catch part works the reject ()
+
+# eg:
+// we don't necessarly need to reject promise this
+// way also works
+const promise=new Promise((resolve)=>{
+    let fileLoaded=false;
+    if(fileLoaded){
+        resolve("File is loaded");
+    }
+    
+});
+
+promise.then(value=>console.log(value))
+       .catch(error=>console.log(error));
+# eg:
+const wait=new Promise(resolve=>{
+    setTimeout(resolve,5000);
+});
+
+wait.then(()=>console.log('Thanks for waiting time'));
+
+#eg:
+const wait=time=>new Promise(resolve=>{
+    setTimeout(resolve,time);
+});
+
+wait(3000).then(()=>console.log('Thanks for waiting time'));
+
+===========================ASYNC======================================
+# async: makes a function return a Promise.
+# eg: 
+async function loadFile(){
+    // no need to call resolve or reject 
+    let fileLoaded=true;
+    if(fileLoaded){
+        return "File is loaded";
+    }
+    else{
+        throw "File is not loaded";
+    }
+}    
+loadFile().then(value=>console.log(value))
+       .catch(error=>console.log(error));
+                OR
+
+function loadFile(){
+    // no need to call resolve or reject 
+    let fileLoaded=false;
+    if(fileLoaded){
+        return Promise.resolve( "File is loaded");
+    }
+    else{
+        return Promise.reject ("File is not loaded");
+    }
+}    
+loadFile().then(value=>console.log(value))
+       .catch(error=>console.log(error));
+============================AWAIT======================================
+# await: makes an async function wait for a Promise.
+#eg:
+async function loadFile(){
+    // no need to call resolve or reject 
+    let fileLoaded=false;
+    if(fileLoaded){
+        return "File is loaded";
+    }
+    else{
+        throw "File is not loaded";
+    }
+}   
+
+async function startProcess(){
+    try{
+        let message= await loadFile();
+        console.log(message);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+startProcess();
+
+======================MODULE=========================================
+# The idea behind a module is that it's a file of reusable code.
+# We can import sections of pre-written code to use whenever we want.
+# Great for any general utility values and functions.
+# Helps to make your code more reusable and maintanable.
+# Think of modules as separate chapters of a book.
+
+#eg:
+ <script type="module"src="index8.js"></script>
+
+--> The above in .html file.
+
+export const PI=3.14159;
+export function getCircumfrance(radius){
+    return 2*PI*radius;
+}
+
+export function getArea(radius){
+    //return PI*Math.pow(radius,2);
+     return PI*radius*radius;
+}
+
+--> The above on .js file we have separately.
+
+import{PI,getCircumfrance,getArea}from "./math_ut_8.js";
+console.log(PI);
+let circumfrance=getCircumfrance(10);
+console.log(circumfrance);
+                 OR
+//import{PI,getCircumfrance,getArea}from "./math_ut_8.js";
+import * as MathUtil from "./math_ut_8.js";
+console.log(MathUtil.PI);
+let circumfrance=MathUtil.getCircumfrance(10);
+console.log(circumfrance);
+--> The above is on .js file we are currently using to import.
+
+============================DOM========================================
+
+# DOM : stands for Document Object Model.
+# It is an API-Application Programming Interface.
+# It is an interface for changing the content of the page.
+# eg: console.log(document);
+--> This tells us what we have in our .html file while we write it in .js
+      console.dir(document); // tell all properties of DOM
+# eg:
+console.dir(document); // tell all properties of DOM
+console.log(document.title); // tell title 
+console.log(document.URL); // tell URL
+document.title="Part-8 is here"; // change title
+document.location-"http://www.google.com";// takes to google
+
+//document.body.style.backgroundColor="skyblue";
+// changes the background color of our html page.
+//document.getElementById('myTitle').style.color='green';
+
+============================SELECT ELEMENTS===========================
+
+#  eg:
+    <h1 id="myTitle">This is a simple clock program</h1>
+    <label id="myLabel"></label>
+    <h1 id="myMenu">This is the Menu</h1>
+    <input type="radio" name="fruits" value="apple" checked="checked" >
+    <label for="apple">Apple</label><br>
+    <input type="radio" name="fruits" value="orange" >
+    <label for="orange">Orange</label><br>
+    <input type="radio" name="fruits" value="banana">
+    <label for="banana">Banana</label><br>
+
+    <ul>
+        <li>Carrot</li>
+        <li>Cabbage</li>
+        <li>Salad</li>
+    </ul>
+
+    <div class="dessert">ICE-CREAM</div>
+    <div class="dessert">CAKE</div>
+    <div class="dessert">CHOCOLATE</div>
+
+--> The above is on .html file.
+
+let element=document.getElementById('myMenu');
+element.style.backgroundColor="lightblue";
+let fruits=document.getElementsByName('fruits');
+// same radio button items have the same name
+console.log(fruits[2]);
+//we get a node list of items. We access like an array.
+fruits.forEach(fruit=>{
+    if(fruit.checked){
+        console.log(fruit.value);
+    }
+})
+
+let vegetables=document.getElementsByTagName("li");
+vegetables[0].style.backgroundColor="lightgreen";
+vegetables[1].style.backgroundColor="lightblue";
+vegetables[2].style.backgroundColor="red";
+
+let des=document.getElementsByClassName('dessert');
+des[0].style.backgroundColor='lightgreen';
+
+//let eleme=document.querySelector("#myMenu"); // id
+// let eleme=document.querySelector("li"); // TagName
+// we can pass id,classname,tag name or attribute
+// we put # before id names.
+// we put . before className used in division.
+
+
+//let eleme=document.querySelectorAll("li");// TagName for list
+//let eleme=document.querySelectorAll(".dessert");// ClassName for division
+let eleme=document.querySelectorAll("[for]");// id  
+//eleme.style.backgroundColor="purple";
+eleme.forEach(element=>{
+    element.style.backgroundColor="yellow";  
+});
+
+--> This is on .js file.
+=======================DOM TECHNIQUES=================================
+  
+ 1-.firstElemenetChild
+ 2-.lastElementChild
+ 3-.parentElement
+ 4-.nextElementSibling
+ 5-.previousElementSibling
+ 6-.children[]
+ 7- Array.from(.children)
+
+# eg:
+    <ul id="fruit">
+        <li >Banana</li> 
+        <li >Apple</li>
+        <li >Orange</li>
+    </ul>
+
+    <ul id="vegetables">
+        <li>Carrot</li>
+        <li >Peeper</li>
+        <li >Cabbage</li>
+    </ul>
+    
+    <ul id="dessert">
+        <li>Cake</li>
+        <li >Juice</li>
+        <li >Teramisso</li>
+    </ul>
+--> The above in .html file.
+
+let element=document.body;
+let child=element.firstElementChild;
+child.style.backgroundColor='lightgreen';
+
+--> The above on .js file.
+#eg:
+let element=document.body;
+let child=element.lastElementChild;
+// if we make it lastElementChild it gets the script
+// file we have at the end of the class not the ul.
+console.log(child);
+# eg: 
+let parent=element.parentElement;
+parent.style.backgroundColor='lightgreen';// change html background
+# eg:let element=document.querySelectorAll("#vegetables");
+element.forEach(eleme=>{
+    eleme.style.backgroundColor='lightgreen'; 
+});
+#eg:
+let element=document.querySelector("#vegetables");
+//let sibling=element.nextElementSibling;
+// makes the one after called to be selected.
+let sibling=element.previousElementSibling;
+// makes the one before called to be selected.
+sibling.style.backgroundColor='lightgreen';
+# eg:
+let element=document.querySelector("#vegetables");
+let child=element.lastElementChild;
+child.style.backgroundColor='lightgreen';
+
+#eg: 
+let element=document.querySelector("#vegetables");
+let child=element.children[1];
+child.style.backgroundColor='lightgreen';
+
+#eg: 
+let element=document.querySelector("#vegetables");
+let children=Array.from(element.children);
+children.forEach(element=>{
+    element.style.backgroundColor='lightgreen';
+});
+--> Select all the elements inside the list.
+# eg:
+let element=document.querySelector("#vegetables");
+let children=Array.from(element.children);
+children.forEach(child=>child.style.backgroundColor="yellow");
+
+====================ADD/CHANGE HTML ELEMENTS==========================
+# add/change Html element by:
+  
+    1- .innerHTML(vulnerable to XSS attacks)
+# eg:
+const nameTag=document.createElement("h1");
+nameTag.innerHTML="Robel";
+// nameTag.innerHTML=window.prompt('#');
+document.body.append(nameTag);
+  
+    2- .textContent(more secure)
+
+#eg: 
+const nameTag=document.createElement("h1");
+nameTag.textContent=window.prompt('#');
+document.body.append(nameTag);
+
+# eg:
+    <ul id="fruit">
+        <li >Banana</li> 
+        <li >Apple</li>
+        <li >Orange</li>
+    </ul>
+--> The one above in .html file.
+   
+const myList=document.querySelector('#fruit');
+const listItem=document.createElement('li');
+listItem.textContent="mango";
+//myList.append(listItem); // at end
+//myList.prepend(listItem);  // at beginning
+myList.insertBefore(listItem,myList.getElementsByTagName("li")[2]);
+// we add the listItem in index number 2
+
+--> The one above in .js file.
+==========================CSS PROPERTIES===============================
+# eg:
+<h1 id="myHeader"> This is the Extension part</h1>
+
+--> The above in html.
+
+const header=document.getElementById('myHeader');
+header.style.backgroundColor='rgb(20,120,20)';
+header.style.color='rgb(40,250,100)';
+header.style.fontFamily='consolas';
+header.style.textAlign='center';
+header.style.border='2px dotted';
+header.style.display='none'; // hides it
+header.style.display='block';// shows it
+
+--> This above in .js file.
+
+=============================EVENTS====================================
+# eg:
+<button id="myButt" onclick="doSomething()">button</button>
+--> The above in .html file.
+
+function doSomething(){
+    alert('You did something');
+}
+--> The above in .js file.
+
+                    OR
+<button id="myButt">button</button>
+
+--> The above in .html file.
+
+const button=document.getElementById('myButt');
+button.onclick=doSomething;
+function doSomething(){
+    alert('You do something');
+}
+
+--> The above in .js file.
+
+#               OR
+<button id="myButt">button</button>
+
+--> The above in .html file.
+
+
+const ele=document.body;
+ele.onload=doSomething;// works when the page is loading
+function doSomething(){
+    alert('You do something');
+}
+
+--> The above in .js file.
+
+# We can also set it in the body inside the html file as shown below.
+<body onload="doSomething()">
+
+</body>
+--> The above in .html file.
+
+function doSomething(){
+    alert('You do something');
+}
+
+--> The above in .js file.
+# eg:
+ <input id="myText">
+--> The above in .html file.
+const elem=document.getElementById('myText');
+// The text displays when we bring a change on it.
+elem.onchange=doSomething;
+function doSomething(){
+    alert('You can do something');
+}
+--> The above in .js file.
+#eg:
+ <div id="myDiv"></div>
+--> The above in  .html file
+#myDiv{
+    background-color: purple;
+    width: 100px;
+    height: 100px;
+}
+--> The above in  .css file
+const elu=document.getElementById('myDiv');
+//elu.onmouseout=didSomethingElse;
+//elu.onmouseover=didSomething;
+elu.onmouseup=didSomethingElse;
+elu.onmousedown=didSomething;
+// we have onmouseup,leave,enter,move,out,over...
+function didSomething(){
+    elu.style.backgroundColor='yellow';
+}
+function didSomethingElse(){
+    elu.style.backgroundColor='purple';
+}
+--> The above in  .js file
+
+========================ADD EVENT LISTENER=============================
+# addEventListener(event,function,useCapture)
+# You can add any event handelers to one element
+# Even the same event that invokes different functions.
+#eg:
+<div id="innerDiv"></div> 
+--> The above in .html file.
+#innerDiv{
+    background-color: darkorange;
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+}
+--> The above in .css file.
+const innerDiv=document.getElementById('innerDiv');
+innerDiv.addEventListener('mouseover',changeGreen);
+innerDiv.addEventListener('mouseout',changeOrange);
+function changeGreen(){
+    innerDiv.style.backgroundColor='green';
+}
+function changeOrange(){
+    innerDiv.style.backgroundColor='darkorange';
+}
+--> The above in .js file.
+
+# eg:
+<div id="outerDiv">
+   <div id="innerDiv"></div>
+   </div>
+--> The above in .html file.
+#innerDiv{
+    background-color: darkorange;
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+}
+#outerDiv{
+    background-color: darkorange;
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+}
+--> The above in .css file.
+const innerDiv=document.getElementById('innerDiv');
+const outerDiv=document.getElementById('outerDiv');
+
+innerDiv.addEventListener('click',changeBlue);
+outerDiv.addEventListener('click',changeBlue);
+// outerDiv.addEventListener('click',changeBlue,true);
+// The above makes outer element true
+// This is the use of capture when two events are
+// waiting for the same response we specify which
+// one comes first. 
+function changeBlue(){
+    // to check wheather inner or outer is clicked first
+    alert(`You selected ${this.id}`);
+    this.style.backgroundColor='lightblue';
+}
+--> The above in .js file.
+
+===================SHOW AND HIDE HTML ELEMENTS=========================
+# eg:
+    <p> Click on the button</p>
+    <button id="myButton">Toggle</button>
+    <image id="myImg" src="https://purepng.com/public/uploads/large/purepng.com-black-jeep-renegade-carcarvehicletransportjeep-961524653966l65bn.png"></image>
+  --> The above in .html file.  
+#myImg{
+    width: 200px;
+   /* display: none; */
+    
+}
+--> The above in .css file.
+const myButton=document.querySelector('#myButton');
+const myImg=document.querySelector('#myImg');
+myButton.addEventListener('click',()=>{
+    // when clicked it display an arrow function
+    if(myImg.style.display=='none'){
+      // if hidden above it be displayed by one below
+        myImg.style.display='block';
+    }
+    else{
+        myImg.style.display='none';
+    }
+})
+--> The above in .js file.
+                       OR
+<button id="myButton">Toggle</button>
+    <image id="myImg" style="visibility: hidden;" src="https://purepng.com/public/uploads/large/purepng.com-black-jeep-renegade-carcarvehicletransportjeep-961524653966l65bn.png"></image>
+<!--The above makes the space reserved for image free-->
+    <p> Click on the button</p>
+  --> The above in .html file.
+#myImg{
+    width: 200px;
+   /* display: none; */
+    
+}
+  --> The above in .css file.
+const myButton=document.querySelector('#myButton');
+const myImg=document.querySelector('#myImg');
+myButton.addEventListener('click',()=>{
+    // when clicked it display an arrow function
+    if(myImg.style.visibility=='hidden'){
+      // if hidden above it be displayed by one below
+        myImg.style.visibility='visible';
+    }
+    else{
+        myImg.style.visibility='hidden';
+    }
+})
+--> The above in .js file.
+==========================DETECT KEY PRESSES===========================
+# eg:
+window.addEventListener('keydown',event=>console.log(event.key));
+// The above in .js file. It detects and write in console.
+# eg:
+<div id="myId"></div>
+--> The above in .html file.
+#myId{
+    background-color: lightcoral;
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+    position: relative;
+}
+--> The above in .css file.
+const myId=document.getElementById('myId');
+window.addEventListener('keydown',move);
+let x=0;
+let y=0;
+function move(event){
+   switch(event.key){
+    case "ArrowDown":
+        y+=5;
+        myId.style.top=y +"px";
+        break;
+    case "ArrowUp":
+        y-=5;
+        myId.style.top=y +"px";
+        break;
+    case "ArrowRight":
+        x+=5;
+        myId.style.left=x +"px";
+        break;
+    case "ArrowLeft":
+        x-=5;
+        myId.style.left=x +"px";
+        break;
+    default:
+        break;
+   }
+}
+--> The above in .js file.
+===========================SIMPLE ANIMATIONS===========================
+# eg:
+ <button id="theButton">BEGIN</button>
+    <div id="theDiv"></div>
+
+--> The above in .html file.
+
+#theDiv{
+    background-color: orangered;
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+--> The above in .css file.
+
+const theButton=document.getElementById('theButton');
+const theAnimation=document.getElementById('theDiv');
+
+theButton.addEventListener('click',begin);
+// begin above is a callback.
+function begin(){
+    let timerId=null;
+    let x=0;
+    let y=0;
+
+    timerId= setInterval(frame,7);
+    // change every 7 ms.
+    function frame(){
+        if(x>=150|| y>=150){
+            clearInterval(timerId);// stop animation
+        }
+        else{
+            y+=1;
+            x+=1;
+            theAnimation.style.left=x+"px";
+            theAnimation.style.top=y+"px";
+        }
+    }
+
+}
+
+--> The above in .js file.
+
+                 OR(for .js part)
+
+const theButton=document.getElementById('theButton');
+const theAnimation=document.getElementById('theDiv');
+
+theButton.addEventListener('click',begin);
+// begin above is a callback.
+function begin(){
+    let timerId=null;
+    let degrees=0;
+
+    timerId= setInterval(frame,7);
+    // change every 7 ms.
+    function frame(){
+        if(degrees>=360){
+            clearInterval(timerId);// stop animation
+        }
+        else{
+            degrees+=1;
+            theAnimation.style.transform="rotateZ("+degrees+"deg)";
+            // rotate the element in the given axis above.
+            // we use rotateX,rotateY,rotateZ.
+        }
+    }
+
+}
+                       OR(for .js part)
+
+const theButton=document.getElementById('theButton');
+const theAnimation=document.getElementById('theDiv');
+
+theButton.addEventListener('click',begin);
+// begin above is a callback.
+function begin(){
+    let timerId=null;
+    let degrees=0;
+    let x=0;
+    let y=0;
+
+    timerId= setInterval(frame,7);
+    // change every 7 ms.
+    function frame(){
+        if(x>=280||y>=280){
+            clearInterval(timerId);// stop animation
+        }
+        else{
+            degrees+=10;
+            x+=1;
+            y+=1;
+            theAnimation.style.top=y+"px";
+            theAnimation.style.left=x+"px";
+            theAnimation.style.transform="rotateZ("+degrees+"deg)";
+            // rotate the element in the given axis above.
+            // we use rotateX,rotateY,rotateZ.
+        }
+    }
+
+}
+                    OR(for .js part)
+
+
+const theButton=document.getElementById('theButton');
+const theAnimation=document.getElementById('theDiv');
+
+theButton.addEventListener('click',begin);
+// begin above is a callback.
+function begin(){
+    let timerId=null;
+    let scaleX=1;// 1 means 100%
+    let scaleY=1;
+    
+
+    timerId= setInterval(frame,7);
+    // change every 7 ms.
+    function frame(){
+       // increement
+        if(scaleX>=2||scaleY>=2){
+    
+            clearInterval(timerId);// stop animation
+        }
+        else{
+            scaleX+=0.02;// 2 %
+            scaleY+=0.02;// 2 %
+            theAnimation.style.transform="scale("+scaleX+","+scaleY+")"
+        
+        }/*
+        // decreement
+        if(scaleX<=0.2||scaleY<=0.2){
+            clearInterval(timerId);// stop animation
+        }
+        else{
+            scaleX-=0.02;// 2 %
+            scaleY-=0.02;// 2 %
+            theAnimation.style.transform="scale("+scaleX+","+scaleY+")"
+        
+        }  */
+    }
+
+}
+
+=============================CANVAS API================================
+# Canvas API: is a means for drawing graphics. It is used for 
+              animations ,games ,data visualization.
+#eg: 
+<canvas id="myCanvas"  width="500" height="500"></canvas>
+
+--> The above is in .html file.
+
+#myCanvas{
+    border: 2px solid;
+   /* background-color: yellow;*/
+   
+
+}
+
+--> The above is in .css file.
+
+// canvas is the picture and the frame together
+// context is painting in picture frame
+let canvas=document.getElementById('myCanvas');
+let context=canvas.getContext("2d");
+  // DRAW-LINES
+context.lineWidth=10;
+context.strokeStyle='lightgreen';
+context.beginPath();// to begin drawing line
+context.moveTo(0,0);// top-left coordinates
+context.lineTo(250,250);// to draw line
+context.lineTo(250,350);// to draw line
+context.lineTo(350,500);// to draw line
+context.moveTo(500,0); // top-right 
+context.lineTo(250,250);// to draw line
+context.moveTo(0,500); // bottom-left
+context.lineTo(250,250);// to draw line
+context.stroke(); 
+
+--> The above is in .js file.
+
+                     OR(the .js part)
+
+let canvas=document.getElementById('myCanvas');
+let context=canvas.getContext("2d");
+
+  // Draw Triangle
+context.beginPath();
+/*
+context.moveTo(250,0);
+context.lineTo(0,500);
+context.moveTo(250,0);
+context.lineTo(500,500);*/
+context.fillStyle='lightyellow';
+context.lineWidth=7;
+context.strokeStyle='blue';
+context.moveTo(250,0);
+context.lineTo(0,250);
+context.lineTo(500,250);
+context.lineTo(250,0);
+context.fill();
+context.stroke();
+
+                     OR(the .js part)
+
+let canvas=document.getElementById('myCanvas');
+let context=canvas.getContext("2d");
+
+  // Draw Rectangle
+// We draw 4 rectangles inside the canvas.
+context.strokeStyle='green';
+context.lineWidth=10;
+context.fillStyle="purple";
+context.fillRect(0,0,250,250);
+context.strokeRect(0,0,250,250);//left-top-width-height
+
+context.strokeStyle='red';
+context.lineWidth=10;
+context.fillStyle="green";
+context.fillRect(0,250,250,250);
+context.strokeRect(0,250,250,250);
+
+context.strokeStyle='orange';
+context.lineWidth=10;
+context.fillStyle="aqua";
+context.fillRect(250,0,250,250);
+context.strokeRect(250,0,250,250);
+
+context.strokeStyle='pink';
+context.lineWidth=10;
+context.fillStyle="darkgreen";
+context.fillRect(250,250,250,250);
+context.strokeRect(250,250,250,250);
+
+                     OR(the .js part)
+#syntax : we write it in between the one below.
+ // Draw Circle
+context.beginPath();
+
+context.stroke();
+ 
+              (the .js part--below)
+
+let canvas=document.getElementById('myCanvas');
+let context=canvas.getContext('2d');
+      // Draw Circle
+// (x,y,r,sAngle,eAngle,counterclockwise)
+// the above are :
+//(start coor.x,start coor.y,radius,startAngle,endAngle,)
+// sAngle and eAngle are in radians
+context.fillStyle='green';
+context.beginPath();
+context.arc(250,250,100,0,2*Math.PI);
+context.fill();
+context.stroke();
+
+                   OR(the .js part)
+
+let canvas=document.getElementById('myCanvas');
+let context=canvas.getContext('2d');
+      // Draw Text
+context.font="40px MV Boli";
+context.fillStyle="violet";//it is same as font color
+//context.fillText("I am a success",70,70);
+context.textAlign="center";
+context.fillText("I am a success",canvas.width/2,canvas.height/2);// to make at center
+// The text then top and left coordinates
+
+============================WINDOW=====================================
+# window: is interface used to talk to the web browser.
+# The DOM(document object module) is a property of the window.
+# eg:
+ <button id="toButton">Start</button>
+--> ThE above in .html file.
+    
+console.dir(window);
+console.log(window.innerWidth);
+console.log(window.innerHeight);
+console.log(window.outerWidth);
+console.log(window.outerHeight);
+// we get the scroll positions
+console.log(window.scrollX);
+console.log(window.scrollY);
+
+console.log(window.location.href);// this is the location of the window
+//window.location.href="https://google.com"; // leads automatically to google when we open this window
+console.log(window.location.hostname);// we get the host from the location
+// It is local IP address.
+console.log(window.location.pathname);// this is landing page.
+const myButt=document.querySelector('#toButton');
+//myButt.addEventListener('click',()=>window.open());// when clicked open new window.
+//myButt.addEventListener('click',()=>window.open("https://google.com"));// when clicked open new window.
+//myButt.addEventListener('click',()=>window.close());// closes the current window
+myButt.addEventListener('click',()=>window.print()); // we initiate the print of the page we are in.
+//window.alert('hello take care!');
+//window.confirm('Make sure');
+/*
+let put=window.prompt('Entet age');
+if(put<18){
+    window.alert('You must be above 18 to access this page');
+    window.close();
+}*/
+
+--> The above is on .js file
+
+==========================COOKIES======================================
+# Cookie: is a small text file stored on your computer.
+# It is used to remember information about the user.
+# It is saved in name=value pairs.
+#eg:
+console.log(navigator.cookieEnabled);// check if cookie is enabled
+document.cookie="firstName=Robel;expires=Sun, 1 January 2030 12:00:00 UTC; path=/";
+document.cookie="lastName=Massebo;expires=Sun, 1 January 2030 12:00:00 UTC; path=/";
+// we choose default path which is path/.
+console.log(document.cookie);
+// display only name and value for us it is firstName=Robel
+// we can have more than one cookies displayed.
+// The datas written can be overwritten or changed again.
+// If we put expired date passed value like 2000 then it doesn't display since it is passed.
+
+#eg: done using function
+    <label for="firstText">first Name:</label>
+    <input id="firstText"><br>
+    <label for="lastText">last Name:</label>
+    <input id="lastText"><br>
+    <button id="submitBtn" >Submit</button>
+    <button id="cookiesBtn" >get cookies</button>
+
+--> The above in .html file.
+
+setCookie("Greater","Love",365);
+setCookie("The","MAN",365);
+getCookie("The");
+// delateCookie("Greater");
+console.log(document.cookie);
+
+function setCookie(name,value,daysToLive){
+    const date=new Date();
+    date.setTime(date.getTime()+(daysToLive*24*60*60*1000));
+    let expiress="expires = "+date.toUTCString();
+    document.cookie=`${name}=${value};${expiress};`
+}
+// to delate cookie
+function delateCookie(name){
+    setCookie(name,null,null);
+}
+
+function getCookie(name){
+    const cDecoded=decodeURIComponent(document.cookie);
+    const cArray=cDecoded.split(";");
+    let result=null;
+    cArray.forEach(element=>{
+        if(element.indexOf(name)==0){
+            result=element.substring(name.length+1);
+        }
+    })
+    return result;
+    //console.log(cArray);
+}
+
+--> The above is done in .js file.
+
+                    OR( the .js file---the one used with .html file)
+
+const firstText=document.querySelector("#firstText");
+const lastText=document.querySelector("#lastText");
+const submitBtn=document.querySelector("#submitBtn");
+const cookiesBtn=document.querySelector("#cookiesBtn");
+
+submitBtn.addEventListener('click',()=>{
+    setCookie("firstName",firstText.value,365);
+    setCookie("lastName",lastText.value,365);
+});
+cookiesBtn.addEventListener('click',()=>{
+    firstText.value=getCookie("firstName");
+    lastText.value=getCookie("lastName");
+});
+
+function setCookie(name,value,daysToLive){
+    const date=new Date();
+    date.setTime(date.getTime()+(daysToLive*24*60*60*1000));
+    let expiress="expires = "+date.toUTCString();
+    document.cookie=`${name}=${value};${expiress};`
+}
+// to delate cookie
+function delateCookie(name){
+    setCookie(name,null,null);
+}
+
+function getCookie(name){
+    const cDecoded=decodeURIComponent(document.cookie);
+    const cArray=cDecoded.split(";");
+    let result=null;
+    cArray.forEach(element=>{
+        if(element.indexOf(name)==0){
+            result=element.substring(name.length+1);
+        }
+    })
+    return result;
+ }
